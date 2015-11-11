@@ -2,6 +2,7 @@
 #include <QTimer>
 #include <QGraphicsScene>
 #include <QKeyEvent>
+#include <MyRect.h>
 
 #include <QDebug>
 Bullet::Bullet(){
@@ -41,9 +42,12 @@ void Bullet::move(){
     // move bullet up
     setPos(x(),y()+20);
     p_y--;
-    if (p_y=0){
+    if (p_y<=0){
+        this->spawn();
+        MyRect* p=new MyRect();
+        //p->setRect(this->);
         scene()->removeItem(this);
         delete this;
-        this->spawn();
+
     }
 }

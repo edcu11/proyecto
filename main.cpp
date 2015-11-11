@@ -15,7 +15,7 @@ int main(int argc, char *argv[]){
 
     // create an item to add to the scene
     MyRect * player = new MyRect();
-    player->setRect(0,0,100,100); // change the rect from 0x0 (default) to 100x100 pixels
+    player->setRect(0,0,2,100); // change the rect from 0x0 (default) to 100x100 pixels
 
     // add the item to the scene
     scene->addItem(player);
