@@ -3,30 +3,31 @@
 #include <QGraphicsScene>
 #include <QKeyEvent>
 #include <MyRect.h>
+#include <stdlib.h>
 
 #include <QDebug>
 Bullet::Bullet(int s){
     this->tam=s;
     this->p_x=s;
-    p_y=0;
+    this->p_y=0;
 
    switch(s){
    case 1:
-       tam_g=10;
-       this->setRect(0,0,tam_g,20);break;
+       this->tam_g=20;
+       this->setRect(0,0,this->tam_g,20);break;
    case 2:
-       tam_g=20;
-       this->setRect(0,0,tam_g,20);break;
-   case 3:
-       tam_g=30;
-       this->setRect(0,0,tam_g,20);break;
-   case 4:
        tam_g=40;
-       this->setRect(0,0,tam_g,20);break;
+       this->setRect(0,0,this->tam_g,20);break;
+   case 3:
+       this->tam_g=60;
+       this->setRect(0,0,this->tam_g,20);break;
+   case 4:
+        this->tam_g=80;
+       this->setRect(0,0, this->tam_g,20);break;
     }
 
     // connect
-    QTimer * timer = new QTimer();
+    timer = new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(move()));
 
     timer->start(500);
@@ -36,15 +37,15 @@ Bullet::Bullet(int s){
 void Bullet::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Left){
-        if((p_x-tam)>0 && p_x<=10){
-            setPos(x()-10,y());
-            p_x--;
+        if(( this->p_x- this->tam)>0 &&  this->p_x<=10){
+             this->setPos( this->x()-20, this->y());
+             this->p_x--;
         }
     }
     else if (event->key() == Qt::Key_Right){
-        if(p_x>=0 && p_x<10){
-            setPos(x()+10,y());
-            p_x++;
+        if( this->p_x>=0 &&  this->p_x<10){
+            this->setPos( this->x()+20, this->y());
+             this->p_x++;
         }
     }
 }
@@ -61,13 +62,10 @@ void Bullet::spawn(int t)
 void Bullet::move(){
     // move bullet up
     setPos(x(),y()+20);
-    p_y++;
-    if (p_y>=10){
-        this->spawn(4);
-       // MyRect* p=new MyRect();
-        //p->setRect(this->);
-        scene()->removeItem(this);
-        delete this;
-
+     this->p_y++;
+    if (this->p_y>=9){
+        this->spawn(rand() % 4 + 1);
+        this->clearFocus();
+        timer->stop();
     }
 }

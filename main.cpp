@@ -13,7 +13,7 @@ int main(int argc, char *argv[]){
     scene->setSceneRect(0,0,600,800);
 
     MyRect* player = new MyRect();
-    player->setRect(0,0,100,200);
+    player->setRect(0,0,200,200);
 
     scene->addItem(player);
 
