@@ -4,18 +4,10 @@
 #include "Bullet.h"
 
 #include <QDebug>
-void MyRect::keyPressEvent(QKeyEvent *event){
-    if (event->key() == Qt::Key_Left){
-        setPos(x()-10,y());
-    }
-    else if (event->key() == Qt::Key_Right){
-        setPos(x()+10,y());
-    }
-}
 
 void MyRect::spawn()
 {
-    Bullet* b=new Bullet();
+    Bullet* b=new Bullet(2);
     scene()->addItem(b);
     b->setFlag(QGraphicsItem::ItemIsFocusable);
     b->setFocus();

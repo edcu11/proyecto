@@ -9,22 +9,14 @@ int main(int argc, char *argv[]){
 
     QApplication a(argc, argv);
 
-    // create a scene
     QGraphicsScene * scene = new QGraphicsScene();
     scene->setSceneRect(0,0,600,800);
 
-    // create an item to add to the scene
-    MyRect * player = new MyRect();
-    player->setRect(0,0,2,100); // change the rect from 0x0 (default) to 100x100 pixels
+    MyRect* player = new MyRect();
+    player->setRect(0,0,100,200);
 
-    // add the item to the scene
     scene->addItem(player);
 
-    // make rect focusable
-    player->setFlag(QGraphicsItem::ItemIsFocusable);
-    player->setFocus();
-
-    // create a view to visualize the scene
     QGraphicsView * view = new QGraphicsView(scene);
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -34,9 +26,7 @@ int main(int argc, char *argv[]){
     view->setFixedSize(800,600);
     scene->setSceneRect(0,0,800,600);
 
-    player->setPos(view->width()/2,view->height() - player->rect().height());
-
-    player->spawn();
+    player->spawn(1);
 
    // QTimer * timer = new QTimer();
     //QObject::connect(timer,SIGNAL(timeout()),player,SLOT(spawn()));

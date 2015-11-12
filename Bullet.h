@@ -8,10 +8,10 @@
 class Bullet: public QObject,public QGraphicsRectItem{
     Q_OBJECT
 public:
-    Bullet();
-    int p_y,p_x;
+    Bullet(int s);
+    int p_y,p_x,tam,tam_g;
     void keyPressEvent(QKeyEvent * event);
-    void spawn();
+    void spawn(int t);
 public slots:
     void move();
 };

@@ -5,9 +5,25 @@
 #include <MyRect.h>
 
 #include <QDebug>
-Bullet::Bullet(){
-    // drew the rect
-    setRect(0,0,50,20);
+Bullet::Bullet(int s){
+    this->tam=s;
+    this->p_x=s;
+    p_y=0;
+
+   switch(s){
+   case 1:
+       tam_g=10;
+       this->setRect(0,0,tam_g,20);break;
+   case 2:
+       tam_g=30;
+       this->setRect(0,0,tam_g,20);break;
+   case 3:
+       tam_g=40;
+       this->setRect(0,0,tam_g,20);break;
+   case 4:
+       tam_g=50;
+       this->setRect(0,0,tam_g,20);break;
+    }
 
     // connect
     QTimer * timer = new QTimer();
@@ -15,23 +31,27 @@ Bullet::Bullet(){
 
     timer->start(500);
 
-    p_x=10;
-    p_y=10;
 }
 
 void Bullet::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Left){
-        setPos(x()-10,y());
+        if((p_x-tam)>0 && p_x<=10){
+            setPos(x()-10,y());
+            p_x--;
+        }
     }
     else if (event->key() == Qt::Key_Right){
-        setPos(x()+10,y());
+        if(p_x>=0 && p_x<10){
+            setPos(x()+10,y());
+            p_x++;
+        }
     }
 }
 
-void Bullet::spawn()
+void Bullet::spawn(int t)
 {
-    Bullet* b=new Bullet();
+    Bullet* b=new Bullet(t);
     scene()->addItem(b);
     b->setFlag(QGraphicsItem::ItemIsFocusable);
     b->setFocus();
@@ -41,10 +61,10 @@ void Bullet::spawn()
 void Bullet::move(){
     // move bullet up
     setPos(x(),y()+20);
-    p_y--;
-    if (p_y<=0){
-        this->spawn();
-        MyRect* p=new MyRect();
+    p_y++;
+    if (p_y>=10){
+        this->spawn(4);
+       // MyRect* p=new MyRect();
         //p->setRect(this->);
         scene()->removeItem(this);
         delete this;
