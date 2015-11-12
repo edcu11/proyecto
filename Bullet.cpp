@@ -15,13 +15,13 @@ Bullet::Bullet(int s){
        tam_g=10;
        this->setRect(0,0,tam_g,20);break;
    case 2:
-       tam_g=30;
+       tam_g=20;
        this->setRect(0,0,tam_g,20);break;
    case 3:
-       tam_g=40;
+       tam_g=30;
        this->setRect(0,0,tam_g,20);break;
    case 4:
-       tam_g=50;
+       tam_g=40;
        this->setRect(0,0,tam_g,20);break;
     }
 
