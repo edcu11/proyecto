@@ -1,19 +1,29 @@
 #include <QApplication>
-#include "MyRect.h"
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QTimer>
+#include <stdlib.h>
+#include "Bullet.h"
+#include <qdebug.h>
+#include "rect.h"
+
 
 
 int main(int argc, char *argv[]){
 
     QApplication a(argc, argv);
+    int array[20][10];
+    for(int y=0;y<20;y++){
+           for(int x=0;x<10;x++){
+               array[y][x]=0;
+           }
+       }
 
     QGraphicsScene * scene = new QGraphicsScene();
     scene->setSceneRect(0,0,600,800);
 
-    MyRect* player = new MyRect();
-    player->setRect(0,0,200,200);
+    rect* player = new rect(array);
+    player->setRect(0,0,200,400);
 
     scene->addItem(player);
 
@@ -26,11 +36,9 @@ int main(int argc, char *argv[]){
     view->setFixedSize(800,600);
     scene->setSceneRect(0,0,800,600);
 
-    player->spawn(1);
+    player->spawn(rand() % 10 + 1);
 
-   // QTimer * timer = new QTimer();
-    //QObject::connect(timer,SIGNAL(timeout()),player,SLOT(spawn()));
-    //timer->start(10000);
+
 
     return a.exec();
 }

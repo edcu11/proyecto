@@ -1,11 +1,19 @@
-#include <myrect.h>
+#include "rect.h"
 #include <QGraphicsScene>
 #include <QKeyEvent>
 #include "Bullet.h"
 #include <arreglo.h>
 #include <QDebug>
 
-void MyRect::keyPressEvent(QKeyEvent *event){
+
+
+rect::rect(int arreglo[20][10])
+{
+    this->arreglo=arreglo;
+}
+
+void rect::keyPressEvent(QKeyEvent *event)
+{
     if (event->key() == Qt::Key_Left){
         setPos(x()-10,y());
     }
@@ -14,12 +22,10 @@ void MyRect::keyPressEvent(QKeyEvent *event){
     }
 }
 
-void MyRect::spawn(int t, Arreglo* a)
+void rect::spawn(int t)
 {
-    Bullet* b=new Bullet(t,a);
+    Bullet* b=new Bullet(t,this->arreglo);
     scene()->addItem(b);
     b->setFlag(QGraphicsItem::ItemIsFocusable);
     b->setFocus();
-
 }
-
