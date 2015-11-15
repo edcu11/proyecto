@@ -15,10 +15,14 @@ public:
     int p_y,p_x,tam,tam_g;
     int (*arreglo)[10];
     QTimer * timer;
-    //int* a[20][10];
-    //Arreglo* w;
+    void full();
+    bool check_R();
+    bool check_D();
+    bool check_L();
+    bool perdio();
     void keyPressEvent(QKeyEvent * event);
     void spawn(int t);
+
 public slots:
     void move();
 };

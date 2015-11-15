@@ -49,20 +49,72 @@ Bullet::Bullet(int s,int arreglo[20][10]){
     timer = new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(move()));
 
-    timer->start(500);
+    if(perdio())
+        qDebug("perdistes cabron");
+
+    timer->start(150);
+
+
 
 }
+
+void Bullet::full()
+{
+    for(int cont=(this->p_x  - this->tam);cont<this->p_x;cont++){
+        arreglo[this->p_y][cont]=1;
+    }
+
+}
+
+bool Bullet::check_D()
+{
+    for(int cont=(this->p_x  - this->tam);cont<this->p_x;cont++){
+        if(arreglo[this->p_y+1][cont]!=0)
+            return true;
+    }
+    return false;
+}
+
+bool Bullet::check_L()
+{
+    if(arreglo[p_y][(p_x-this->tam)-1]==1 || ((p_x-this->tam)-1)<0)
+        return false;
+    else
+        return true;
+}
+
+//perdio todavio no completada
+bool Bullet::perdio()
+{
+    int pos_y=this->p_y-1;
+
+    for(int cont=(this->p_x  - this->tam);cont<this->p_x;cont++){
+        if(arreglo[pos_y+1][cont]!=0)
+            return true;
+    }
+    return false;
+}
+
+bool Bullet::check_R()
+{
+    if(arreglo[p_y][p_x+1]==1 || p_x+1>10)
+        return false;
+    else
+        return true;
+
+}
+
 
 void Bullet::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Left){
-        if(( this->p_x- this->tam)>0 &&  this->p_x<=10){
+        if(this->check_L()){
              this->setPos( this->x()-20, this->y());
              this->p_x--;
         }
     }
     else if (event->key() == Qt::Key_Right){
-        if(this->p_x-1<9){
+        if(this->check_R()){
             this->setPos( this->x()+20, this->y());
              this->p_x++;
         }
@@ -82,11 +134,16 @@ void Bullet::move(){
     // move bullet up
     setPos(x(),y()+20);
      this->p_y++;
-    if (this->p_y>=19){
-        this->arreglo[p_y][p_x-1]=1;
-        for(int cont_x=0;cont_x<10;cont_x++)
-            qDebug()<<arreglo[p_y][cont_x];
+    if (this->check_D()){
+        //this->p_y>=19
+        this->full();
+        for(int cont_y=0;cont_y<20;cont_y++){
+            for(int cont_x=0;cont_x<10;cont_x++)
+                qDebug()<<arreglo[cont_y][cont_x];
+            qDebug()<<"fila "<<cont_y;
+        }
         qDebug()<<"nuevo";
+
 
         this->spawn(rand() % 10 + 1);
         this->clearFocus();

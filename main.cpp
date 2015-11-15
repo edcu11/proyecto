@@ -6,18 +6,21 @@
 #include "Bullet.h"
 #include <qdebug.h>
 #include "rect.h"
-
+#include <qlist.h>
 
 
 int main(int argc, char *argv[]){
 
     QApplication a(argc, argv);
     int array[20][10];
+
     for(int y=0;y<20;y++){
            for(int x=0;x<10;x++){
                array[y][x]=0;
            }
        }
+
+    QList<Bullet>lista;
 
     QGraphicsScene * scene = new QGraphicsScene();
     scene->setSceneRect(0,0,600,800);
