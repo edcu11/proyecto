@@ -20,12 +20,13 @@ int main(int argc, char *argv[]){
            }
        }
 
-    QList<Bullet>lista;
+    QList<Bullet*>lista;
+
 
     QGraphicsScene * scene = new QGraphicsScene();
     scene->setSceneRect(0,0,600,800);
 
-    rect* player = new rect(array);
+    rect* player = new rect(array,&lista);
     player->setRect(0,0,200,400);
 
     scene->addItem(player);

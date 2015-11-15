@@ -7,9 +7,10 @@
 
 
 
-rect::rect(int arreglo[20][10])
+rect::rect(int arreglo[20][10], QList<Bullet*>* lista)
 {
     this->arreglo=arreglo;
+    this->lista=lista;
 }
 
 void rect::keyPressEvent(QKeyEvent *event)
@@ -24,7 +25,8 @@ void rect::keyPressEvent(QKeyEvent *event)
 
 void rect::spawn(int t)
 {
-    Bullet* b=new Bullet(t,this->arreglo);
+    Bullet* b=new Bullet(t,this->arreglo,this->lista);
+    this->lista->append(b);
     scene()->addItem(b);
     b->setFlag(QGraphicsItem::ItemIsFocusable);
     b->setFocus();
