@@ -5,6 +5,7 @@
 #include <rect.h>
 #include <stdlib.h>
 #include <QDebug>
+#include <randomt.h>
 
 Bullet::Bullet(int s,int arreglo[20][10], QList<Bullet*>* lista){
     this->tam=s;
@@ -12,6 +13,7 @@ Bullet::Bullet(int s,int arreglo[20][10], QList<Bullet*>* lista){
     this->p_y=0;
     this->arreglo=arreglo;
     this->lista=lista;
+
 
     switch(s){
     case 1:
@@ -237,7 +239,15 @@ void Bullet::move(){
     this->p_y++;
     if (this->check_D()){
         this->full();
-        this->spawn(rand() % 10 + 1);
+        RandomT* arbol=new RandomT();
+
+        do{
+        arbol->llenar();
+        arbol->resolver();
+        qDebug()<<arbol->total;
+        }while(arbol->total>10 || arbol->total<=0);
+
+        this->spawn(arbol->total);
         this->clearFocus();
         timer->stop();
 

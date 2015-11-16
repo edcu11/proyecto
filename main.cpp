@@ -8,6 +8,8 @@
 #include "rect.h"
 #include <qlist.h>
 
+#include <randomt.h>
+
 static int score=0;
 int main(int argc, char *argv[]){
 
@@ -39,6 +41,15 @@ int main(int argc, char *argv[]){
     view->show();
     view->setFixedSize(800,600);
     scene->setSceneRect(0,0,800,600);
+
+    RandomT* arbol=new RandomT();
+
+    do{
+    arbol->llenar();
+    arbol->resolver();
+    qDebug()<<arbol->total;
+    }while(arbol->total>10 && arbol->total<0);
+
 
     player->spawn(rand() % 10 + 1);
 
