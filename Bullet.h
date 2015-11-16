@@ -20,6 +20,7 @@ public:
     bool check_D();
     bool check_L();
     bool check_Fila();
+    int  fila_faltante();
     bool perdio();
     void clean_arreglo(int valor_y);
     void act_A(int valor_y,int valor_p);

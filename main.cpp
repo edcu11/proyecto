@@ -8,7 +8,7 @@
 #include "rect.h"
 #include <qlist.h>
 
-
+static int score=0;
 int main(int argc, char *argv[]){
 
     QApplication a(argc, argv);
