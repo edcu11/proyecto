@@ -1,19 +1,16 @@
-#include "rect.h"
+#include "rect1.h"
 #include <QGraphicsScene>
 #include <QKeyEvent>
-#include "Bullet.h"
-#include <arreglo.h>
 #include <QDebug>
 
 
 
-rect::rect(int arreglo[20][10], QList<Bullet*>* lista)
+rect1::rect1()
 {
-    this->arreglo=arreglo;
-    this->lista=lista;
+
 }
 
-void rect::keyPressEvent(QKeyEvent *event)
+void rect1::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Left){
         setPos(x()-10,y());
@@ -23,10 +20,9 @@ void rect::keyPressEvent(QKeyEvent *event)
     }
 }
 
-void rect::spawn(int t)
+void rect1::spawn(int t)
 {
-    Bullet* b=new Bullet(t,this->arreglo,this->lista);
-    this->lista->append(b);
+    Bullet* b=new Bullet(t);
     scene()->addItem(b);
     b->setFlag(QGraphicsItem::ItemIsFocusable);
     b->setFocus();

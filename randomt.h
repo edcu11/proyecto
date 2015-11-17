@@ -1,9 +1,9 @@
 #ifndef RANDOMT_H
 #define RANDOMT_H
 
-#include <queue>
 #include <nodo.h>
 #include <stdlib.h>
+
 class RandomT
 {
 public:

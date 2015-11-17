@@ -1,20 +1,16 @@
 #include <QApplication>
 #include <QGraphicsScene>
 #include <QGraphicsView>
-#include <QTimer>
-#include <stdlib.h>
-#include "Bullet.h"
-#include <qdebug.h>
-#include "rect.h"
-#include <qlist.h>
+#include <game.h>
 
-#include <randomt.h>
-
-static int score=0;
+Game* game;
 int main(int argc, char *argv[]){
 
     QApplication a(argc, argv);
-    int array[20][10];
+
+
+    {
+    /*int array[20][10];
 
     for(int y=0;y<20;y++){
            for(int x=0;x<10;x++){
@@ -28,7 +24,7 @@ int main(int argc, char *argv[]){
     QGraphicsScene * scene = new QGraphicsScene();
     scene->setSceneRect(0,0,600,800);
 
-    rect* player = new rect(array,&lista);
+    rect1* player = new rect1(array,&lista);
     player->setRect(0,0,200,400);
 
     scene->addItem(player);
@@ -42,17 +38,22 @@ int main(int argc, char *argv[]){
     view->setFixedSize(800,600);
     scene->setSceneRect(0,0,800,600);
 
-    RandomT* arbol=new RandomT();
+   // RandomT* arbol=new RandomT();
 
-    do{
+     do{
     arbol->llenar();
     arbol->resolver();
-    qDebug()<<arbol->total;
-    }while(arbol->total>10 && arbol->total<0);
+        if(arbol->total>0 && arbol->total<10){
+            n_valores.append(arbol->total);
+            qDebug()<<arbol->total;
+        }
+    }while();
+*/
 
+    //player->spawn(rand() % 10 + 1);
+    }
 
-    player->spawn(rand() % 10 + 1);
-
+    game=new Game();
 
 
     return a.exec();

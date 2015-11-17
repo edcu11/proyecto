@@ -14,14 +14,16 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     Bullet.cpp \
-    rect.cpp \
     randomt.cpp \
-    nodo.cpp
+    nodo.cpp \
+    game.cpp \
+    rect1.cpp
 
 HEADERS  += \
     Bullet.h \
-    rect.h \
     randomt.h \
-    nodo.h
+    nodo.h \
+    game.h \
+    rect1.h
 
 FORMS    +=

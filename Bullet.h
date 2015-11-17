@@ -10,11 +10,11 @@
 class Bullet: public QObject,public QGraphicsRectItem{
     Q_OBJECT
 public:
-    Bullet(int s,int arreglo[20][10],QList<Bullet*> *lista);
+    Bullet(int s);
     int p_y,p_x,tam,tam_g;
-    int (*arreglo)[10];
+    //int (*arreglo)[10];
     QTimer * timer;
-    QList<Bullet*>* lista;
+   // QList<Bullet*>* lista;
     void full();
     bool check_R();
     bool check_D();
@@ -25,6 +25,7 @@ public:
     void clean_arreglo(int valor_y);
     void act_A(int valor_y,int valor_p);
     void act_L(int valor_y);
+    void act_Alturas(Bullet* b);
     Bullet* buscar(int valor_y);
     void keyPressEvent(QKeyEvent * event);
     void spawn(int t);
