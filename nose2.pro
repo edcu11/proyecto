@@ -17,13 +17,15 @@ SOURCES += main.cpp \
     randomt.cpp \
     nodo.cpp \
     game.cpp \
-    rect1.cpp
+    rect1.cpp \
+    ecuaciones_s.cpp
 
 HEADERS  += \
     Bullet.h \
     randomt.h \
     nodo.h \
     game.h \
-    rect1.h
+    rect1.h \
+    ecuaciones_s.h
 
 FORMS    +=

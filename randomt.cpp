@@ -30,11 +30,10 @@ void RandomT::llenar()
     nodo=new Nodo(operadores());
     nodo->izq=new Nodo(operadores());
     nodo->der=new Nodo(operadores());
-    nodo->izq->izq=new Nodo(rand()%5+1);
-    nodo->der->der=new Nodo(rand()%5+1);
-    nodo->izq->der=new Nodo(rand()%5+1);
-    nodo->der->izq=new Nodo(rand()%5+1);
-
+    nodo->izq->izq=new Nodo(rand()%5+1+'0');
+    nodo->der->der=new Nodo(rand()%5+1+'0');
+    nodo->izq->der=new Nodo(rand()%5+1+'0');
+    nodo->der->izq=new Nodo(rand()%5+1+'0');
 }
 
 void RandomT::resolver()
@@ -56,6 +55,21 @@ int RandomT::suma(char ope, int valor1, int valor2)
            case '*':
                return valor1*valor2; break;
        }
-       return 0;
+    return 0;
+}
+
+void RandomT::a_char()
+{
+    a[0]='(';
+    a[1]=nodo->izq->izq->val;
+    a[2]=nodo->izq->val;
+    a[3]=nodo->izq->der->val;
+    a[4]=')';
+    a[5]=nodo->val;
+    a[6]='(';
+    a[7]=nodo->der->izq->val;
+    a[8]=nodo->der->val;
+    a[9]=nodo->der->der->val;
+    a[10]=')';
 }
 

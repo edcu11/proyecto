@@ -65,24 +65,6 @@ Bullet::Bullet(int s){
     timer->start(150);
 
 
-    //game->lista->append(this);
-
-   /* if(fila_faltante()!=-1){
-        int fila=fila_faltante();
-        act_A(fila,fila-1);
-        act_L(fila);
-    }
-
-    if(perdio()){
-        qDebug("perdistes cabron");
-        for(int c=0;c<lista->size();c++){
-            scene()->removeItem(lista->at(c));
-        }
-        for(int c=0;c<20;c++){
-            for(int f=0;f<10;f++)
-                arreglo[c][f]=0;
-        }
-    }*/
 
 }
 
@@ -180,39 +162,6 @@ void Bullet::act_L(int valor_y)
         }
     }
     clean_arreglo(menor);
-
-    /*
-    int menor=20;
-    QList<Bullet*> its=game->lista;
-       for(int cont=0; cont<its.size(); cont++){
-           if( typeid(*its[cont])==typeid(Bullet) && its[cont]->pos().y()<valor_y*20){
-               qDebug()<<its[cont]->pos().y()<<"aquie esta";
-               its[cont]->setPos(its[cont]->pos().x(), its[cont]->pos().y()+20);
-               game->lista.at(cont)->p_y=(int)its[cont]->pos().y()/20;
-               if(its[cont]->pos().y()<menor)
-                   menor=its[cont]->pos().y();
-
-           }
-       }
-      // this->clean_arreglo(menor);
-
-    /*
-    if(valor_y-1>=0){
-        Bullet* tempo=buscar(valor_y-1);
-        while(tempo!=NULL){
-            tempo->p_y+=1;
-            tempo->setPos(tempo->x(),tempo->y()+20);
-            tempo=buscar(valor_y-1);
-        }
-        if(tempo==NULL){
-            this->clean_arreglo(valor_y-1);
-            return;
-        }
-        act_L(valor_y-1);
-    }
-   //
-   */
-
 }
 
 void Bullet::act_Alturas(Bullet *b)
@@ -226,7 +175,6 @@ void Bullet::act_Alturas(Bullet *b)
 
 Bullet* Bullet::buscar(int valor_y)
 {
-   // QList<Bullet*>::iterator i;
     for(int c=0;c<game->lista.size();c++){
         if(game->lista.at(c)->p_y==valor_y){
             Bullet* temp=game->lista.takeAt(c);
@@ -270,6 +218,13 @@ void Bullet::spawn(int t)
     b->setFlag(QGraphicsItem::ItemIsFocusable);
     b->setFocus();
 
+
+    for(int c=0; c<4;c++){
+        game->sigs[c]->actualizar(game->sigs[c+1]->valor);
+    }
+    QString ecua=game->ecuaciones.first();
+    game->ecuaciones.removeFirst();
+    game->sigs[4]->actualizar(ecua);
 }
 
 
@@ -285,15 +240,11 @@ void Bullet::move(){
    // rand()%10+1
         this->spawn(game->tamanos.first());
         game->tamanos.removeFirst();
+        game->ecuaciones.removeFirst();
         this->clearFocus();
         timer->stop();
 
-
         if(check_Fila()){
-            //for(int cont=0; cont<game->lista.size(); cont++){
-              //  qDebug()<<game->lista.at(cont);
-           // }
-
             Bullet* temp=buscar(this->p_y);
             while(temp!=NULL){
                 scene()->removeItem(temp);
@@ -301,14 +252,9 @@ void Bullet::move(){
             }
             delete temp;
             act_A(this->p_y,this->p_y-1);
-            qDebug("ultimoact");
             act_L(this->p_y);
-            qDebug("priemr act");
-            //scene()->removeItem(this);
-            //delete this;
-
-
+            game->pnts+=10;
+            game->score->actualizar(QString("Score: ")+QString::number(game->pnts));
         }
-
     }
 }

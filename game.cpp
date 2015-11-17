@@ -1,5 +1,6 @@
 #include "game.h"
 #include <qdebug.h>
+#include <qstring.h>
 
 Game::Game(QWidget *parent)
 {
@@ -23,13 +24,29 @@ Game::Game(QWidget *parent)
     do{
     arbol->llenar();
     arbol->resolver();
+    arbol->a_char();
         if(arbol->total>0 && arbol->total<10){
             tamanos.append(arbol->total);
-            qDebug()<<arbol->total;
+            ecuaciones.append(arbol->a);
         }
     }while(tamanos.size()<100);
     int n=tamanos.takeAt(0);
 
+    for(int c=0; c<5;c++){
+        sigs[c]=new Ecuaciones_S();
+        QString ecua=ecuaciones.first();
+        ecuaciones.removeFirst();
+        sigs[c]->actualizar(ecua);
+        sigs[c]->setPos(220,c*20);
+        scene->addItem(sigs[c]);
+    }
+
+    score=new Ecuaciones_S();
+    pnts=0;
+
+    score->actualizar(QString("Score: ")+QString::number(pnts));
+    score->setPos(400,40);
+    scene->addItem(score);
 
 
     QGraphicsView * view = new QGraphicsView(scene);
@@ -45,7 +62,6 @@ Game::Game(QWidget *parent)
     scene->addItem(b);
     b->setFlag(QGraphicsItem::ItemIsFocusable);
     b->setFocus();
-
 
 
 }

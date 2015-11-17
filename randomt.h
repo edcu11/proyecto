@@ -8,12 +8,13 @@ class RandomT
 {
 public:
     RandomT();
-    char a[7];
+    char a[11];
     int total;
     char operadores();
     void llenar();
     void resolver();
     int suma(char ope,int valor1, int valor2);
+    void a_char();
 
 
 
